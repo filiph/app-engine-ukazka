@@ -54,3 +54,6 @@ docs/_build/
 
 # PyCharm
 .idea/
+
+# Mac
+.DS_Store

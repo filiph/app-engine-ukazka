@@ -3,28 +3,20 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>{%  block title %}{% endblock %}</title>
 
         <meta name="description" content="{% block description %}{% endblock %}" />
 
         <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="/css/pure/0.4.2/pure-min.css">
+        <link rel="stylesheet" href="/css/main.css">
     </head>
     <body>
         <div class="site">
-            <header>– Ukázka –</header>
 
             {% block content %}
             {% endblock %}
 
-
-          <div class="footer">
-            <div class="contact">
-              <p>
-                <small>Patička...</small>
-              </p>
-            </div>
-          </div>
         </div>
 
     </body>
