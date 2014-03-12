@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Seznam jmen{% endblock %}
+{% block description %}Bla bla bla{% endblock %}
+
+{% block content %}
+    <h1>
+        {{ title }}
+    </h1>
+
+    {% if message %}
+        <div class="message">
+        {% autoescape false %}
+            {{ message }}
+        {% endautoescape %}
+        </div>
+    {% endif %}
+
+    {% if names %}
+        Whoa, names!
+    {% endif %}
+{% endblock %}
