@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Seznam jmen{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 {% block description %}Bla bla bla{% endblock %}
 
 {% block content %}
@@ -18,7 +18,8 @@
     {% if scientists %}
         <ul>
             {% for s in scientists %}
-            <li>{{ s.name }} {{ s.surname }} ({{ s.birth_date.year }})</li>
+            <li>{{ s.name }} {{ s.surname }} ({{ s.birth_date.year }}) <br/>
+                <img src="{{ s.portrait_url + "=s64" }}"/></li>
             {% endfor %}
         </ul>
     {% endif %}

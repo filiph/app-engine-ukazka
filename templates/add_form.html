@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Nahrát vědce{% endblock %}
+{% block description %}Bla bla bla{% endblock %}
+
+{% block content %}
+    <h1>
+        Nahrát vědce
+    </h1>
+
+    <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
+        Jméno: <input type="text" name="name"> <br/>
+        Příjmení: <input type="text" name="surname"> <br/>
+        Datum narození: <input type="date" name="birth_date"> <br/>
+        Portrét: <input type="file" name="portrait"> <br/>
+        <input type="submit" value="Nahrát">
+    </form>
+{% endblock %}
