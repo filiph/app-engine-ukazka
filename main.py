@@ -4,9 +4,12 @@ import webapp2
 from jinja import render_html
 
 from google.appengine.api import users
+from google.appengine.api import mail
 
 from scientist import Scientist
 from datetime import date
+
+
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -39,7 +42,18 @@ class CreateScientistsHandler(webapp2.RequestHandler):
         mull.put()
 
 
+class SendMailHandler(webapp2.RequestHandler):
+    def post(self):
+        user_address = self.request.get("email")
+        sender_address = "pls-reply@example.com"
+        subject = u"Vítejte"
+        message = u"Tento email vám přišel z App Enginu"
+
+        mail.send_mail(sender_address, user_address, subject, message)
+        
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/setup', CreateScientistsHandler)
+    ('/setup', CreateScientistsHandler),
+    ('/sendmail', SendMailHandler)
 ], debug=True)
