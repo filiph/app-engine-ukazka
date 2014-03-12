@@ -15,7 +15,11 @@
         </div>
     {% endif %}
 
-    {% if names %}
-        Whoa, names!
+    {% if scientists %}
+        <ul>
+            {% for s in scientists %}
+            <li>{{ s.name }} {{ s.surname }} ({{ s.birth_date.year }})</li>
+            {% endfor %}
+        </ul>
     {% endif %}
 {% endblock %}

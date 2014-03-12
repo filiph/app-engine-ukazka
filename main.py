@@ -10,13 +10,10 @@ from datetime import date
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        if user:
-            render_html(self, "list.html", u"Ahoj",
-                        u"Nejsi ty náhodou {}?".format(user.nickname()))
-        else:
-            render_html(self, "list.html", u"Ahoj",
-                        u"<a href='{}'>Přihlaš se</a>.".format(users.create_login_url("/")))
+        scientists = Scientist.query().order(Scientist.birth_date).fetch()
+        render_html(self, "list.html", u"Česká věda",
+                    u"Zde je seznam.",
+                    template_values={"scientists": scientists})
 
 class CreateScientistsHandler(webapp2.RequestHandler):
     def get(self):
