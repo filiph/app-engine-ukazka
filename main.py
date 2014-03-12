@@ -1,8 +1,10 @@
+# coding=utf-8
+
 import webapp2
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
+        self.response.write(u'Hello world!')
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
