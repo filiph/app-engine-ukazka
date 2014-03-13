@@ -19,7 +19,7 @@
         <ul>
             {% for s in scientists %}
             <li>{{ s.name }} {{ s.surname }} ({{ s.birth_date.year }}) <br/>
-                <img src="{{ s.portrait_url + "=s64" }}"/></li>
+                <img src="{{ s.portrait_url }}=s64"/></li>
             {% endfor %}
         </ul>
     {% endif %}
