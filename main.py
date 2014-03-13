@@ -13,7 +13,10 @@ from google.appengine.api.images import get_serving_url
 from scientist import Scientist
 from datetime import date, datetime
 
+import logging
 
+
+from google.appengine.ext import deferred
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -55,6 +58,7 @@ class SendMailHandler(webapp2.RequestHandler):
 
         mail.send_mail(sender_address, user_address, subject, message)
 
+
 class AddScientistHandler(blobstore_handlers.BlobstoreUploadHandler):
     def get(self):
         upload_url = blobstore.create_upload_url("/upload")
@@ -76,9 +80,30 @@ class AddScientistHandler(blobstore_handlers.BlobstoreUploadHandler):
         self.redirect("/upload")
 
 
+
+def factorial(n):
+    result = 1
+    for i in xrange(1, n + 1):
+        result *= i
+
+    logging.info("{}! = {}".format(n, result))
+
+
+
+class ComputeHandler(webapp2.RequestHandler):
+    def get(self, n_str):
+        n = int(n_str)
+
+        deferred.defer(factorial, n)
+
+
+
+
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/setup', CreateScientistsHandler),
     ('/sendmail', SendMailHandler),
     ('/upload', AddScientistHandler),
+    ('/compute/([0-9]+)', ComputeHandler),
 ], debug=True)
