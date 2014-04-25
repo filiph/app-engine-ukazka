@@ -18,11 +18,14 @@ import logging
 
 from google.appengine.ext import deferred
 
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         scientists = Scientist.query().order(Scientist.birth_date).fetch()
         render_html(self, "list.html", u"Česká věda",
-                    u"Zde je seznam.",
+                    u"Zde je seznam. Pokud jste tu kvůli "
+                    u"<a href='https://www.youtube.com/watch?v=WesbPh601dc'>videu</a>, "
+                    u"možná vás bude zajímat kód.",
                     template_values={"scientists": scientists})
 
 class CreateScientistsHandler(webapp2.RequestHandler):
@@ -74,11 +77,10 @@ class AddScientistHandler(blobstore_handlers.BlobstoreUploadHandler):
         blob_info = upload_files[0]
         assert (isinstance(blob_info, BlobInfo))
         s.portrait_blob_key = blob_info.key()
-        s.portrait_url = get_serving_url(s.portrait_blob_key)
+        s.portrait_url = get_serving_url(s.portrait_blob_key, secure_url=True)
         s.put()
 
         self.redirect("/upload")
-
 
 
 def factorial(n):
@@ -89,15 +91,11 @@ def factorial(n):
     logging.info("{}! = {}".format(n, result))
 
 
-
 class ComputeHandler(webapp2.RequestHandler):
     def get(self, n_str):
         n = int(n_str)
 
         deferred.defer(factorial, n)
-
-
-
 
 
 app = webapp2.WSGIApplication([

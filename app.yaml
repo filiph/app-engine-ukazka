@@ -12,8 +12,14 @@ handlers:
 - url: /css
   static_dir: static/css
 
+- url: /
+  script: main.app
+  secure: always
+
 - url: .*
   script: main.app
+  login: admin
+  secure: always
 
 libraries:
 - name: webapp2
@@ -22,6 +28,8 @@ libraries:
   version: "2.6"
 - name: numpy
   version: "1.6.1"
+- name: webob
+  version: "1.2.3"
 
 builtins:
 - deferred: on
