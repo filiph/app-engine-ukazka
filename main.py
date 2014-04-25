@@ -25,7 +25,8 @@ class MainHandler(webapp2.RequestHandler):
         render_html(self, "list.html", u"Česká věda",
                     u"Zde je seznam. Pokud jste tu kvůli "
                     u"<a href='https://www.youtube.com/watch?v=WesbPh601dc'>videu</a>, "
-                    u"možná vás bude zajímat kód.",
+                    u"možná vás bude zajímat "
+                    u"<a href='https://github.com/filiph/app-engine-ukazka'>kód</a>.",
                     template_values={"scientists": scientists})
 
 class CreateScientistsHandler(webapp2.RequestHandler):
@@ -96,6 +97,7 @@ class ComputeHandler(webapp2.RequestHandler):
         n = int(n_str)
 
         deferred.defer(factorial, n)
+        self.response.write(u"Zatímco faktoriál se teprve bude počítat, vy už vidíte toto.")
 
 
 app = webapp2.WSGIApplication([
